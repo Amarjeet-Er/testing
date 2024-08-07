@@ -50,11 +50,9 @@
     font-size: 18px;
 }
 .password>.eyeBtn{
-    /* background-color: red; */
-    /* float: right; */
     position: absolute;
-    right: 50px;
-    top: 48%;
+    right: 48px;
+    top: 47.5%;
     color: var(--color-3);
     transform: translateY(-50%);
     font-size: 20px;
