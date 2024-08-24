@@ -1,7 +1,7 @@
 {
   "student": [
     {
-      "name": "amar",
+      "name": "amarjeet",
       "fatherName": "Arjun Chaudhary",
       "dob": "2001-01-01",
       "address": "Khilwat",
@@ -27,17 +27,17 @@
       "class": "Class 10"
     },
     {
-      "id": "6cfd",
-      "name": "sdsdsdh",
+      "name": "akhil",
       "fatherName": "hghghggh",
       "dob": "0665-05-06",
-      "address": "565656",
-      "city": "565665",
-      "state": "6565",
+      "address": "hjp",
+      "city": "hjp",
+      "state": "hjp",
       "pin": "655665",
       "phone": "6556655665",
-      "email": "6565@gmail.com",
-      "class": "Class 1"
+      "email": "akhil@gmail.com",
+      "class": "Class 1",
+      "id": "6cfd"
     }
   ]
 }
