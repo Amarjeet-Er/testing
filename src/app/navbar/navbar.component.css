@@ -1,0 +1,9 @@
+button{
+    padding: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  

@@ -1,26 +1,68 @@
-<div id="wrapper">
-  <div class="logobox">
-    <img src="https://m.media-amazon.com/images/I/61OgrIEL7EL.jpg" alt="">
-  </div>
-
-  <div class="contentbox">
-    <div class="contentarea">
-      <div class="username loginpage">
-        <input type="text" placeholder="Username">
-      </div>
-      <div class="password loginpage">
-        <input type="password" [type]="hide ? 'password' : 'text'" placeholder="Password">
-        <mat-icon mat-icon-button matSuffix class="eyeBtn" (click)="hide = !hide">{{hide ? 'visibility_off' :
-          'visibility'}}</mat-icon>
-      </div>
-      <div class="login loginpage">
-        <button>Login</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="footerbox">
-    <p>Powered By :- &nbsp; &nbsp;</p>
-    <img src="https://macreel.co.in/img/logo4.png" alt="">
-  </div>
+<div>
+  <ol start="1">
+    <li> Create a school enrolment form which enables us to collect the following details and store data in a service
+      file. All
+      Fields are required</li>
+  </ol>
 </div>
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>
+
+
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        More Question & Answer
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <div>
+      <ol start="2">
+        <li>
+          Find the number of occurrences of all the elements present in an array.
+          <p><b>Output :- </b> {{ result | json }}</p>
+        </li>
+
+        <li>
+          Reverse the string in the following manner.
+          <p><b>Output :-</b> {{output}}</p>
+        </li>
+
+        <li>
+          What is binding ? How many types of binding is there in Angular ? Explain with examples.
+          <p>Ans:- <b>Binding</b> in Angular refers to the process of synchronizing data between the component
+            (TypeScript/JavaScript code) and the view (HTML template). It allows you to display data dynamically in the
+            view
+            and respond to user input.</p>
+
+          <p>Types of Binding in Angular </p>
+          <p> There are four main types of binding in Angular:</p>
+
+          <p>1. Interpolation (One-Way Data Binding):</p>
+          <p>. Description: Displays data from the component in the view.</p>
+          <p>. Example :- {{ Interpolation }}</p>
+
+          <p>2. Property Binding (One-Way Data Binding):</p>
+          <p>. Description: Binds data from the component to an HTML element’s property.</p>
+          <p>. Example :- {{PropertyBinding}}</p>
+
+          <p>3. Event Binding: </p>
+          <p>. Description: Allows the component to respond to user actions (e.g., clicks).</p>
+          <p>. Example :- {{Event}}</p>
+
+          <p>4. Two-Way Data Binding: </p>
+          <p>. Description: Combines property binding and event binding to keep the view and the component in sync. </p>
+          <p>. Example :- {{TwoWay}}</p>
+        </li>
+        <li>
+          What is Dependency Injection in Angular ?
+          <p>Ans : - Dependency Injection (DI) in Angular is a design pattern where Angular provides and manages the
+            services or objects that a class needs, rather than the class creating them itself.</p>
+          <pre>. Example : - {{ Dependency }}</pre>
+        </li>
+      </ol>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

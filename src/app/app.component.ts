@@ -1,48 +1,53 @@
-// app.component.ts
-import { Component } from '@angular/core';
-import { LocationService } from './location.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  hide = true;
+export class AppComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion!: MatAccordion;
 
-  locationDetails: any = {};
+  result: { [key: number]: number } = {};
+  output: string = ''
+  Interpolation: string = '<p>{{ message }}</p>'
+  PropertyBinding: string = '<img [src]="imageUrl" />'
+  Event: string = '<button (click)="onClick()">Click Me</button>'
+  TwoWay: string = '<input [(ngModel)]="username" />'
 
-  constructor(private locationService: LocationService) {}
-
-  async ngOnInit() {
-    try {
-      const coordinates = await this.locationService.getCurrentPosition();
-      const lat = coordinates.coords.latitude;
-      const lon = coordinates.coords.longitude;
-      console.log(lat, lon, 'number any');
-      
-      const response: any = await this.locationService.getCityName(lat, lon);
-      console.log(response);
-
-      this.locationDetails = {
-        pinCode: response.address.postcode || 'N/A',
-        village: response.address.hamlet || response.address.military || response.address.street || 'N/A',
-        block: response.address.county || 'N/A',
-        state: response.address.state || 'N/A',
-        district: response.address.state_district || response.address.city_district || 'N/A',
-        country: response.address.country || 'N/A',
-      };
-      console.log(this.locationDetails);
-    } catch (error) {
-      console.error('Error getting location', error);
-      this.locationDetails = {
-        pinCode: 'Error',
-        village: 'Error',
-        block: 'Error',
-        state: 'Error',
-        district: 'Error',
-        country: 'Error',
-      };
+  Dependency: string = `
+    @Injectable({ providedIn: 'root' })
+    export class MyService { }
+    @Component({
+      selector: 'app-example',
+      template: \`
+        <p>Example Component</p>\`,
+    })
+    export class ExampleComponent {
+      constructor(private myService: MyService) { }
     }
+  `;
+
+  ngOnInit() {
+    const array = [1, 3, 6, 1, 6, 2, 3, 2, 3];
+    this.result = this.countOccurrences(array);
+
+    const input = "Taj Mahal";
+    this.output = this.reverseWords(input);
+    console.log(this.output);
+  }
+  countOccurrences(arr: number[]): { [key: number]: number } {
+    return arr.reduce((acc, element) => {
+      acc[element] = (acc[element] || 0) + 1;
+      return acc;
+    }, {} as { [key: number]: number });
+  }
+
+  reverseWords(input: string): string {
+    return input
+      .split(' ')
+      .map(word => word.split('').reverse().join(''))
+      .join(' ');
   }
 }
