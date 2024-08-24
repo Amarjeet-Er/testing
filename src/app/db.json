@@ -1,3 +1,43 @@
 {
-  "student": []
+  "student": [
+    {
+      "name": "amar",
+      "fatherName": "Arjun Chaudhary",
+      "dob": "2001-01-01",
+      "address": "Khilwat",
+      "city": "Hajipur",
+      "state": "Bihar",
+      "pin": "844101",
+      "phone": "8965231245",
+      "email": "amar@gmail.com",
+      "class": "Class 10",
+      "id": "f09a"
+    },
+    {
+      "id": "4b4e",
+      "name": "Amarjeet Kr",
+      "fatherName": "Arjun Chaudhary",
+      "dob": "2001-01-01",
+      "address": "Khilwat",
+      "city": "Hajipur",
+      "state": "Bihar",
+      "pin": "844101",
+      "phone": "8965231245",
+      "email": "amar@gmail.com",
+      "class": "Class 10"
+    },
+    {
+      "id": "6cfd",
+      "name": "sdsdsdh",
+      "fatherName": "hghghggh",
+      "dob": "0665-05-06",
+      "address": "565656",
+      "city": "565665",
+      "state": "6565",
+      "pin": "655665",
+      "phone": "6556655665",
+      "email": "6565@gmail.com",
+      "class": "Class 1"
+    }
+  ]
 }

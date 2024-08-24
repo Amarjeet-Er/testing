@@ -5,7 +5,6 @@ import { EnrollmentService } from '../enrollment.service';
 import { MatSort } from '@angular/material/sort';
 import { HomeComponent } from '../home/home.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,14 +21,16 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _service: EnrollmentService,
     private _dialog: MatDialog,
-    private _router: Router
-  ) {
-    this._router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
-  }
+  ) {}
 
   ngOnInit() {
+    this.loadData();
+    this._dialog.afterAllClosed.subscribe(() => {
+      this.loadData();
+    });
+  }
+
+  loadData() {
     this._service.get_std().subscribe(
       (res: any) => {
         this.dataSource.data = res;
@@ -38,12 +39,18 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
   onUpdate(row: any) {
-    this._dialog.open(HomeComponent, {
+    const dialogRef = this._dialog.open(HomeComponent, {
       data: row,
-      disableClose: true,
+      disableClose: true
+    });
+
+    dialogRef.componentInstance.refreshData.subscribe(() => {
+      this.loadData();
     });
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

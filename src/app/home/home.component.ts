@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EnrollmentService } from '../enrollment.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   actionBtn: string = 'Submit';
   heading = 'Enrollment Form';
   studentForm!: FormGroup;
-  dataChanged: any;
+  @Output() refreshData = new EventEmitter<void>();
 
   constructor(
     private _service: EnrollmentService,
@@ -21,9 +21,7 @@ export class HomeComponent implements OnInit {
     private _router: Router,
     private matref: MatDialogRef<HomeComponent>,
     @Inject(MAT_DIALOG_DATA) public edit_std: any
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
     this.studentForm = this.fb.group({
@@ -48,23 +46,24 @@ export class HomeComponent implements OnInit {
 
   onSubmit(): void {
     if (this.studentForm.valid) {
-      if (this.actionBtn === 'Submit') {
+      if (this.edit_std) {
+        this.onUpdate();
+      } else {
         this._service.post_std(this.studentForm.value).subscribe(
           (res: any) => {
-            alert('Enrollment Successfully...');
-            this._router.navigate(['dashboard'])
+            alert('Enrollment Successfully submitted.');
+            this._router.navigate(['dashboard']);
+            this.studentForm.reset();
             this.matref.close();
+            this.refreshData.emit();
           },
           (error: any) => {
             console.error('Error occurred:', error);
           }
         );
-        this.studentForm.reset();
-      } else {
-        this.onUpdate();
       }
     } else {
-      console.log('Form is invalid');
+      alert('Please fill in all required fields.');
     }
   }
 
@@ -72,13 +71,15 @@ export class HomeComponent implements OnInit {
     if (this.edit_std) {
       this._service.put_std(this.edit_std.id, this.studentForm.value).subscribe(
         (res: any) => {
-          alert('Enrollment Updated');
-          this._router.navigate(['/dashboard'])
+          alert('Enrollment Updated successfully.');
+          this._router.navigate(['/dashboard']);
           this.studentForm.reset();
           this.matref.close();
+          this.refreshData.emit();
         },
         (error: any) => {
           console.error('Error occurred:', error);
+          alert('An error occurred while updating the enrollment.');
         }
       );
     } else {
