@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'class', 'address', 'edit'];
+  displayedColumns: string[] = ['id', 'name', 'fatherName', 'dob', 'address', 'city', 'state', 'pin', 'email', 'phone', 'class', 'edit'];
   dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -21,10 +21,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   constructor(
     private _service: EnrollmentService,
     private _dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadData();
+    this.loadData();
+    this._dialog.afterAllClosed.subscribe(() => {
+      this.loadData();
+    });
   }
 
   ngAfterViewInit() {
@@ -56,3 +60,4 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 }
+

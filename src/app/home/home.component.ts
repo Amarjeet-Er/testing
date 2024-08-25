@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder,
     private _router: Router,
     private matref: MatDialogRef<HomeComponent>,
-    @Inject(MAT_DIALOG_DATA) public edit_std: any
+    @Inject(MAT_DIALOG_DATA) public edit_std:any
   ) {}
 
   ngOnInit(): void {

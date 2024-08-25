@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class EnrollmentService {
   private localStorageKey = 'students';
-  private lastIdKey = 'lastStudentId'; // Key to store the last used ID
+  private lastIdKey = 'lastStudentId';
 
-  constructor() {}
+  constructor() { }
 
   post_std(data: any) {
     const students = this.get_std() || [];
@@ -15,6 +15,15 @@ export class EnrollmentService {
     students.push({ ...data, id: newId });
     localStorage.setItem(this.localStorageKey, JSON.stringify(students));
     this.setLastId(newId);
+  }
+
+  private getNextId(): number {
+    const lastId = Number(localStorage.getItem(this.lastIdKey)) || 0;
+    return lastId + 1;
+  }
+
+  private setLastId(id: number): void {
+    localStorage.setItem(this.lastIdKey, id.toString());
   }
 
   put_std(id: number, data: any) {
@@ -29,14 +38,5 @@ export class EnrollmentService {
   get_std() {
     const students = localStorage.getItem(this.localStorageKey);
     return students ? JSON.parse(students) : [];
-  }
-
-  private getNextId(): number {
-    const lastId = Number(localStorage.getItem(this.lastIdKey)) || 0;
-    return lastId + 1;
-  }
-
-  private setLastId(id: number): void {
-    localStorage.setItem(this.lastIdKey, id.toString());
   }
 }
