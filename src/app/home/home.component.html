@@ -44,7 +44,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Pin</mat-label>
-      <input matInput formControlName="pin" placeholder="Enter Pin">
+      <input matInput formControlName="pin" placeholder="Enter Pin" type="number">
       <mat-error *ngIf="studentForm.get('pin')?.hasError('required')">Pin is required</mat-error>
       <mat-error *ngIf="studentForm.get('pin')?.hasError('minlength')">Pin must be 6 digits long</mat-error>
       <mat-error *ngIf="studentForm.get('pin')?.hasError('maxlength')">Pin must be 6 digits long</mat-error>
@@ -53,7 +53,7 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Phone No</mat-label>
-      <input matInput formControlName="phone" placeholder="Enter phone no">
+      <input matInput formControlName="phone" placeholder="Enter phone no" type="number">
       <mat-error *ngIf="studentForm.get('phone')?.hasError('required')">Phone number is required</mat-error>
       <mat-error *ngIf="studentForm.get('phone')?.hasError('minlength')">Phone number must be 10 digits long</mat-error>
       <mat-error *ngIf="studentForm.get('phone')?.hasError('maxlength')">Phone number must be 10 digits long</mat-error>
@@ -63,7 +63,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>email</mat-label>
-      <input matInput formControlName="email" placeholder="enter email">
+      <input matInput formControlName="email" placeholder="enter email" type="email">
       <mat-error *ngIf="studentForm.get('email')?.hasError('required')">Email is required</mat-error>
     </mat-form-field>
 

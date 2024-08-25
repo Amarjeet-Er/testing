@@ -1,23 +1,42 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EnrollmentService {
-  constructor(
-    private http: HttpClient
-  ) { }
+  private localStorageKey = 'students';
+  private lastIdKey = 'lastStudentId'; // Key to store the last used ID
 
-  baseUrl: string = 'http://localhost:3000/';
+  constructor() {}
 
   post_std(data: any) {
-    return this.http.post<any>(`${this.baseUrl}student`, data);
+    const students = this.get_std() || [];
+    const newId = this.getNextId();
+    students.push({ ...data, id: newId });
+    localStorage.setItem(this.localStorageKey, JSON.stringify(students));
+    this.setLastId(newId);
   }
+
   put_std(id: number, data: any) {
-    return this.http.put<any>(`${this.baseUrl}student/${id}`, data);
+    const students = this.get_std() || [];
+    const index = students.findIndex((std: any) => std.id === id);
+    if (index !== -1) {
+      students[index] = { ...data, id };
+      localStorage.setItem(this.localStorageKey, JSON.stringify(students));
+    }
   }
+
   get_std() {
-    return this.http.get<any>(`${this.baseUrl}student`);
+    const students = localStorage.getItem(this.localStorageKey);
+    return students ? JSON.parse(students) : [];
+  }
+
+  private getNextId(): number {
+    const lastId = Number(localStorage.getItem(this.lastIdKey)) || 0;
+    return lastId + 1;
+  }
+
+  private setLastId(id: number): void {
+    localStorage.setItem(this.lastIdKey, id.toString());
   }
 }

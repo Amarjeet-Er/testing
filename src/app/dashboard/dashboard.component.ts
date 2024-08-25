@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EnrollmentService } from '../enrollment.service';
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'class', 'address', 'edit'];
   dataSource = new MatTableDataSource<any>();
 
@@ -25,19 +25,16 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this._dialog.afterAllClosed.subscribe(() => {
-      this.loadData();
-    });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   loadData() {
-    this._service.get_std().subscribe(
-      (res: any) => {
-        this.dataSource.data = res;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
-    );
+    const data = this._service.get_std();
+    this.dataSource.data = data;
   }
 
   onUpdate(row: any) {
