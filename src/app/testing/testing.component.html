@@ -1,0 +1,77 @@
+<mat-toolbar>
+  <span>{{ heading }}</span>
+</mat-toolbar>
+
+<div id="wrapper">
+  <form [formGroup]="enquiry_form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter name" />
+      <mat-error *ngIf="enquiry_form.get('name')?.hasError('required')"
+        >Student name is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Phone No</mat-label>
+      <input
+        matInput
+        formControlName="phone"
+        placeholder="Enter phone no"
+        type="number"
+      />
+      <mat-error *ngIf="enquiry_form.get('phone')?.hasError('required')"
+        >Phone number is required</mat-error
+      >
+      <mat-error *ngIf="enquiry_form.get('phone')?.hasError('minlength')"
+        >Phone number must be 10 digits long</mat-error
+      >
+      <mat-error *ngIf="enquiry_form.get('phone')?.hasError('maxlength')"
+        >Phone number must be 10 digits long</mat-error
+      >
+      <mat-error *ngIf="enquiry_form.get('phone')?.hasError('pattern')"
+        >Invalid mobile number</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        placeholder="enter email"
+        type="email"
+      />
+      <mat-error *ngIf="enquiry_form.get('email')?.hasError('required')"
+        >Email is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="address">
+      <mat-label>Subject</mat-label>
+      <input matInput formControlName="subject" placeholder="Enter subject" />
+      <mat-error *ngIf="enquiry_form.get('subject')?.hasError('required')"
+        >Subject is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="address">
+      <mat-label>Message</mat-label>
+      <input matInput formControlName="message" placeholder="Enter message" />
+      <mat-error *ngIf="enquiry_form.get('message')?.hasError('required')"
+        >Message is required</mat-error
+      >
+    </mat-form-field>
+
+    <div class="submit">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSubmit()"
+        [disabled]="!enquiry_form.valid"
+      >
+        {{ actionBtn }}
+      </button>
+    </div>
+  </form>
+</div>
